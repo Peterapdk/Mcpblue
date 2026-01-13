@@ -1,0 +1,7 @@
+{
+  "name": "Copy of MCP Nexus Dashboard",
+  "description": "A sophisticated management console for Model Context Protocol (MCP) servers. Install, configure, and monitor your MCP tools for Gemini, OpenCode, and other AI clients with a sleek, modern interface.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
