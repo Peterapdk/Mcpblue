@@ -22,7 +22,8 @@ export const ConfigEditor: React.FC<ConfigEditorProps> = ({
   servers, onUpdateConfig, onUpdateSkills, onUpdateProjectSecrets, onImportConfigs, activeProjectName, projectSecrets = {}, secrets = []
 }) => {
   const installedServers = servers.filter(s => s.installed);
-  const [selectedServer, setSelectedServer] = useState(installedServers[0]?.id || '');
+  const selectedServerId = installedServers[0]?.id || '';
+  const [selectedServer, setSelectedServer] = useState(selectedServerId);
   const [jsonError, setJsonError] = useState<string | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   
@@ -46,7 +47,7 @@ export const ConfigEditor: React.FC<ConfigEditorProps> = ({
       JSON.parse(localConfig);
       setJsonError(null);
     } catch (e: any) {
-      setJsonError(e.message);
+      setJsonError(e.message || 'Invalid JSON');
     }
   }, [localConfig]);
 
@@ -472,7 +473,7 @@ export const ConfigEditor: React.FC<ConfigEditorProps> = ({
           ) : (
             <div className="h-[500px] rounded-[40px] border-2 border-dashed border-white/5 flex flex-col items-center justify-center text-zinc-600 bg-zinc-900/10 backdrop-blur-sm">
               <Command className="w-12 h-12 mb-4 opacity-10" />
-              <p className="italic font-medium">Select an active server in {activeProjectName} to configure capabilities.</p>
+              <p className="italic font-medium">Select an active server in {String(activeProjectName)} to configure capabilities.</p>
             </div>
           )}
         </div>
